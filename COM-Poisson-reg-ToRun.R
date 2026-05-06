@@ -20,7 +20,7 @@ summary(fit)
 
 ### Stan
 
-setwd("C:/Users/vid09002/Dropbox/ResearchLASSO/COM-Poisson")
+#setwd("C:/Users/vid09002/Dropbox/ResearchLASSO/COM-Poisson")
 M = 200             # increase if tail is heavy
 hybrid_tol = 1e-6    # COMPoissonReg-style switching tolerance
 

@@ -53,7 +53,7 @@ ff<-10
 y<-y1[1:(n-ff)]
 T<-length(y)
 
-setwd("C:/Users/vid09002/Dropbox/ResearchLASSO/COM-Poisson/")
+#setwd("C:/Users/vid09002/Dropbox/ResearchLASSO/COM-Poisson/")
 
 M = 200             # increase if tail is heavy
 hybrid_tol = 1e-6    # COMPoissonReg-style switching tolerance
@@ -76,7 +76,7 @@ lines(fitPred05)
 lines(fitPred95)
 
 
-setwd("C:/Users/vid09002/Dropbox/ResearchLASSO/ZINAR-GeneralizedPoisson/")
+#setwd("C:/Users/vid09002/Dropbox/ResearchLASSO/ZINAR-GeneralizedPoisson/")
 
 fit_stan <- stan(file='ZIINAR1-GP.stan', 
                    data = list(y=c(y), T=T,ff=ff),
