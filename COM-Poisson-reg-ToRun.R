@@ -38,3 +38,6 @@ fit.n_stan <- stan(file='CMP-regression.stan',
 
 qoi=c("beta0","beta1","nu")
 print(fit.n_stan,par=qoi)
+
+
+

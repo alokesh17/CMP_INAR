@@ -32,12 +32,21 @@ for (t in 2:n) {
 zinp_inar
 }
 
-# Parameters
-alpha <- 0.6              # INAR(1) thinning parameter
-lambda1 <- 2.5             # GP parameter ?1
-lambda2 <- 0.2              # GP parameter ?2
-n <- 510                 # series length
-rho <- 0.8            # probability of zero inflation
+# ── Overdispersed (original)
+# Parameters 
+# alpha <- 0.6              # INAR(1) thinning parameter
+# lambda1 <- 2.5             # GP parameter ?1
+# lambda2 <- 0.2              # GP parameter ?2
+# n <- 510                 # series length
+# rho <- 0.8            # probability of zero inflation
+
+
+
+# ── Equidispersed ─────────────────────────────────────────────
+alpha <- 0.6; lambda1 <- 2.5; lambda2 <- 0.0; rho <- 0.0; n <- 510
+
+# ── Underdispersed ────────────────────────────────────────────
+#alpha <- 0.6; lambda1 <- 2.5; lambda2 <- -0.2; rho <- 0.0; n <- 510
 
 y1<-simul_zinarp(n, alpha, lambda1, lambda2, rho)
 
@@ -94,5 +103,17 @@ plot(y1[(n-ff+1):n],ylim=c(0,20))
 lines(fitPredM)
 lines(fitPred05)
 lines(fitPred95)
- 
+
+
+# CMP
+aic_cmp <- mean(extract(fitCMP_stan)$aic)
+bic_cmp <- mean(extract(fitCMP_stan)$bic)
+
+# GP
+aic_gp  <- mean(extract(fit_stan)$aic)
+bic_gp  <- mean(extract(fit_stan)$bic)
+
+cat(sprintf("CMP: AIC = %.2f, BIC = %.2f\n", aic_cmp, bic_cmp))
+cat(sprintf("GP:  AIC = %.2f, BIC = %.2f\n", aic_gp,  bic_gp))
+
  
