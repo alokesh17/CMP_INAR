@@ -43,10 +43,10 @@ zinp_inar
 
 
 # ── Equidispersed ─────────────────────────────────────────────
-alpha <- 0.6; lambda1 <- 2.5; lambda2 <- 0.0; rho <- 0.0; n <- 510
+#alpha <- 0.6; lambda1 <- 2.5; lambda2 <- 0.0; rho <- 0.05; n <- 510
 
 # ── Underdispersed ────────────────────────────────────────────
-#alpha <- 0.6; lambda1 <- 2.5; lambda2 <- -0.2; rho <- 0.0; n <- 510
+alpha <- 0.6; lambda1 <- 2.5; lambda2 <- -0.2; rho <- 0.05; n <- 510
 
 y1<-simul_zinarp(n, alpha, lambda1, lambda2, rho)
 
@@ -67,10 +67,18 @@ T<-length(y)
 M = 200             # increase if tail is heavy
 hybrid_tol = 1e-6    # COMPoissonReg-style switching tolerance
 
-fitCMP_stan <- stan(file='ZIINAR1-CMP.stan', 
-                 data = list(y=c(y), T=T,ff=ff, M=M, hybrid_tol=hybrid_tol),
-                 thin = 2, chains = 1, iter = 1000, warmup = 100,
-                 seed = 9955)
+#older stan version
+
+# fitCMP_stan <- stan(file='ZIINAR1-CMP.stan', 
+#                  data = list(y=c(y), T=T,ff=ff, M=M, hybrid_tol=hybrid_tol),
+#                  thin = 2, chains = 1, iter = 1000, warmup = 100,
+#                  seed = 9955)
+
+#optimized stan version
+fitCMP_stan <- stan(file='ZIINAR1-CMP-fast.stan', 
+                    data = list(y=c(y), T=T,ff=ff, M=M, hybrid_tol=hybrid_tol),
+                    thin = 2, chains = 1, iter = 5000, warmup = 1000,
+                    seed = 9955)
 
 qoi <- c("lambda", "nu", "alpha","rho")
 print(fitCMP_stan, pars=qoi)

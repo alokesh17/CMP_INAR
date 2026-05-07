@@ -38,7 +38,7 @@ parameters{
   real<lower=0, upper=1> alpha;           // thinning parameter
   real<lower=0> lambda1;    // GP parameter λ1
   real<lower=0,upper=1> lambda2;    //GP parameter λ2
-
+  //real<lower=-1,upper=1> lambda2;    //GP parameter λ2
   real<lower=0, upper=1> rho; // probability of zero inflation
 }
 transformed parameters{
