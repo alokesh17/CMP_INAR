@@ -149,8 +149,10 @@ transformed parameters{
 model{
     alpha  ~ uniform(0,1);
     rho ~   uniform(0,1);
-  lambda  ~ lognormal(0, 2);
-  nu  ~ lognormal(0, 2);
+  //lambda  ~ lognormal(0, 2);
+  //nu  ~ lognormal(0, 2);
+  lambda ~ student_t(4, 0, 5);
+  nu ~ student_t(4, 0, 5);
 
 for (t in 1:T) {
                target += log(mu[t]);
