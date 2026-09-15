@@ -497,7 +497,7 @@ plot_recovery <- function(data_list, n_vals, file_stem, title_suffix = "") {
   pdf(paste0(file_stem, ".pdf"), width = 8.5, height = 7); make_plot(); dev.off()
   png(paste0(file_stem, ".png"), width = 2000, height = 1650, res = 220); make_plot(); dev.off()
 }
-
+if (exists("win_rate")) rm(win_rate)
 plot_bias <- function(data_list, n_vals, file_stem) {
   regimes <- names(data_list); n_regimes <- length(regimes)
   jitters <- (seq_len(n_regimes) - (n_regimes + 1) / 2) * 0.03 * diff(range(n_vals))
@@ -955,3 +955,4 @@ cat("\nRe-wrote fig_modelcomparison.{pdf,png} using this run's actual win rates"
 cat("\nDone. Part 1 fits the recovery grid; Part 2 plots off `summary_tab`",
     "(and `win_rate` once Part 4 has run); Part 3's plot_predictive()/qoi",
     "are ready for any fit with ff > 0; Part 4 compares against ZIP/ZINB/ZIGP.\n")
+
